@@ -1,0 +1,80 @@
+@import './theme.less';
+
+.liquid-box {
+  width: calc(1px * var(--w));
+  height: calc(1px * var(--w));
+  box-shadow: 0px 2px 7px 0px var(--shadow);
+  border-radius: 50%;
+  position: relative;
+  border: 2px solid transparent;
+  background-image: var(--bg);
+  background-origin: border-box;
+  background-clip: content-box, border-box;
+  box-sizing: content-box;
+
+  .liquid-box-inner {
+    --d: calc(1px * var(--w) + 2px);
+    width: var(--d);
+    height: var(--d);
+    --l: calc(var(--d) / 2);
+    position: absolute;
+    overflow: hidden;
+    left: calc(50% - var(--l));
+    top: calc(50% - var(--l));
+    border-radius: 50%;
+
+    .inner {
+      width: 100%;
+      height: 100%;
+      position: absolute;
+      left: 0;
+      background: var(--first-color);
+      /* 直接对bottom操作 */
+      bottom: calc(-128% + var(--per));
+      z-index: 3;
+
+      .liquid-box-waves {
+        position: absolute;
+        left: 0;
+        bottom: 100%;
+        width: 210%;
+        stroke: none;
+
+        &:nth-child(1) {
+          fill: var(--first-color);
+          transform: translate(-50%, 0);
+          z-index: 3;
+          animation: wave-move1 1.5s linear infinite;
+          /* svg重合有一条线  设置阴影缓和*/
+          box-shadow: 0 10px 4px 4px var(--first-color);
+        }
+
+        &:nth-child(2) {
+          fill: var(--secend-color);
+          transform: translate(0, 0);
+          z-index: 2;
+          animation: wave-move2 3s linear infinite;
+        }
+
+        &:nth-child(3) {
+          fill: var(--third-color);
+          transform: translate(-50%, 0);
+          z-index: 1;
+          animation: wave-move1 3s linear infinite;
+        }
+
+        @keyframes wave-move1 {
+          100% {
+            transform: translate(0, 0);
+          }
+        }
+
+        @keyframes wave-move2 {
+          100% {
+            transform: translate(-50%, 0);
+          }
+        }
+      }
+    }
+  }
+}
